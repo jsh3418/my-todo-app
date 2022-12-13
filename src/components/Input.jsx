@@ -1,4 +1,6 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { BASE_URL } from "../constants/constant";
 
 const TodoInputWrapper = styled.div`
   box-sizing: border-box;
@@ -34,12 +36,36 @@ const CheckButton = styled.button`
   margin-top: 10px;
 `;
 
-function Input() {
+function Input({ fetchData }) {
+  const [value, setValue] = useState("");
+
+  const handleChangeInput = (event) => {
+    setValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newData = {
+      content: value,
+    };
+
+    postData(newData);
+    fetchData();
+    setValue("");
+  };
+
+  const postData = (newData) => {
+    fetch(`${BASE_URL}/todos`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(newData) });
+  };
+
   return (
-    <TodoInputWrapper>
-      <TodoInput />
-      <CheckButton>V</CheckButton>
-    </TodoInputWrapper>
+    <form onSubmit={handleSubmit}>
+      <TodoInputWrapper>
+        <TodoInput onChange={handleChangeInput} value={value} />
+        <CheckButton onclick={handleSubmit}>V</CheckButton>
+      </TodoInputWrapper>
+    </form>
   );
 }
 

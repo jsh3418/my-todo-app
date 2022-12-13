@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BASE_URL } from "../constants/constant";
 
 const List = styled.li`
   width: 360px;
@@ -21,16 +22,30 @@ const EditButton = styled.button`
 `;
 
 const DeleteButton = styled.button`
+  margin-left: 5px;
   margin-right: 10px;
 `;
 
-function Todo() {
+function Todo({ todo, fetchData }) {
+  const deleteData = () => {
+    fetch(`${BASE_URL}/todos/${todo.id}`, {
+      method: "DELETE",
+    });
+  };
+
+  const handleDeleteButton = () => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      deleteData();
+      fetchData();
+    }
+  };
+
   return (
     <List>
       <CheckBox type="checkbox"></CheckBox>
-      할일 내용
+      <span>{todo.content}</span>
       <EditButton>수정</EditButton>
-      <DeleteButton>삭제</DeleteButton>
+      <DeleteButton onClick={handleDeleteButton}>삭제</DeleteButton>
     </List>
   );
 }
