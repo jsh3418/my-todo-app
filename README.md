@@ -4,7 +4,7 @@ CRUD 기능을 간단히 구현한 웹앱입니다.
 
 ## 데모
 
-<img src="/Users/jsh3418/Desktop/my-todo-app/gif-maker.gif">
+<img src="https://github.com/jsh3418/my-todo-app/blob/main/gif-maker.gif?raw=true">
 
 ## 기능
 
