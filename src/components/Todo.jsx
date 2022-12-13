@@ -28,13 +28,13 @@ const DeleteButton = styled.button`
 
 function Todo({ todo, fetchData }) {
   const deleteData = () => {
-    fetch(`${BASE_URL}/todos/${todo.id}`, {
+    return fetch(`${BASE_URL}/todos/${todo.id}`, {
       method: "DELETE",
     });
   };
 
   const editData = (content) => {
-    fetch(`${BASE_URL}/todos/${todo.id}`, {
+    return fetch(`${BASE_URL}/todos/${todo.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -46,17 +46,17 @@ function Todo({ todo, fetchData }) {
     });
   };
 
-  const handleDeleteButtonClick = () => {
+  const handleDeleteButtonClick = async () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      deleteData();
+      await deleteData();
       fetchData();
     }
   };
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = async () => {
     const editContent = prompt("수정하실 내용을 적어주세요");
     if (editContent) {
-      editData(editContent);
+      await editData(editContent);
       fetchData();
     }
   };
