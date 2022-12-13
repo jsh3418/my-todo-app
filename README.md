@@ -1,5 +1,17 @@
 # My Todo App
 
-피그마 프로토타입
+CRUD 기능을 간단히 구현한 웹앱입니다.
 
-[https://www.figma.com/proto/dU1vUMtPgU1OUzFH8D2y8Q/Untitled?node-id=1%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A2](https://www.figma.com/proto/dU1vUMtPgU1OUzFH8D2y8Q/Untitled?node-id=1%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=1%3A2)
+## 데모
+
+<img src="/Users/jsh3418/Desktop/my-todo-app/gif-maker.gif">
+
+## 기능
+
+1. 입력창에 내용을 입력 후 엔터를 누르거나 체크 박스를 누르면 Todo가 추가됩니다.
+
+2. 삭제 버튼을 누르면 삭제할 수 있습니다.
+
+3. 수정 버튼을 누르면 수정할 수 있습니다.
+
+4. json 서버를 열면 새로고침하여도 상태가 유지됩니다.
