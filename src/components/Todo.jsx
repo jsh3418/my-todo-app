@@ -33,9 +33,30 @@ function Todo({ todo, fetchData }) {
     });
   };
 
+  const editData = (content) => {
+    fetch(`${BASE_URL}/todos/${todo.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: todo.id,
+        content,
+      }),
+    });
+  };
+
   const handleDeleteButton = () => {
     if (window.confirm("삭제하시겠습니까?")) {
       deleteData();
+      fetchData();
+    }
+  };
+
+  const handleEditButton = () => {
+    const editContent = prompt("수정하실 내용을 적어주세요");
+    if (editContent) {
+      editData(editContent);
       fetchData();
     }
   };
@@ -44,7 +65,7 @@ function Todo({ todo, fetchData }) {
     <List>
       <CheckBox type="checkbox"></CheckBox>
       <span>{todo.content}</span>
-      <EditButton>수정</EditButton>
+      <EditButton onClick={handleEditButton}>수정</EditButton>
       <DeleteButton onClick={handleDeleteButton}>삭제</DeleteButton>
     </List>
   );

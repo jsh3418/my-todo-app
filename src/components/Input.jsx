@@ -46,17 +46,19 @@ function Input({ fetchData }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newData = {
-      content: value,
-    };
-
-    postData(newData);
+    postData();
     fetchData();
     setValue("");
   };
 
-  const postData = (newData) => {
-    fetch(`${BASE_URL}/todos`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(newData) });
+  const postData = () => {
+    fetch(`${BASE_URL}/todos`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: value,
+      }),
+    });
   };
 
   return (
