@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { BASE_URL } from "../constants/constant";
 
@@ -7,14 +8,15 @@ const List = styled.li`
   display: flex;
   align-items: center;
 
-  font-size: 20px;
-
   border-bottom: 0.5px solid #000000;
+
+  font-size: 20px;
 `;
 
 const CheckBox = styled.input`
-  width: 36px;
   transform: scale(2);
+  margin-left: 15px;
+  margin-right: 15px;
 `;
 
 const EditButton = styled.button`
@@ -27,6 +29,8 @@ const DeleteButton = styled.button`
 `;
 
 function Todo({ todo, fetchData }) {
+  const [checked, setChecked] = useState(todo.checked);
+
   const deleteData = () => {
     return fetch(`${BASE_URL}/todos/${todo.id}`, {
       method: "DELETE",
@@ -42,6 +46,21 @@ function Todo({ todo, fetchData }) {
       body: JSON.stringify({
         id: todo.id,
         content,
+        checked,
+      }),
+    });
+  };
+
+  const checkData = () => {
+    fetch(`${BASE_URL}/todos/${todo.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: todo.id,
+        content: todo.content,
+        checked: !todo.checked,
       }),
     });
   };
@@ -61,10 +80,15 @@ function Todo({ todo, fetchData }) {
     }
   };
 
+  const handleCheckBoxClick = () => {
+    setChecked(!checked);
+    checkData();
+  };
+
   return (
     <List>
-      <CheckBox type="checkbox"></CheckBox>
-      <span>{todo.content}</span>
+      <CheckBox type="checkbox" checked={checked} onChange={handleCheckBoxClick}></CheckBox>
+      <span style={checked ? { opacity: 0.3, textDecoration: "line-through" } : {}}>{todo.content}</span>
       <EditButton onClick={handleEditButtonClick}>수정</EditButton>
       <DeleteButton onClick={handleDeleteButtonClick}>삭제</DeleteButton>
     </List>

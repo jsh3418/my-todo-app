@@ -57,6 +57,7 @@ function Input({ fetchData }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         content: value,
+        checked: false,
       }),
     });
   };
