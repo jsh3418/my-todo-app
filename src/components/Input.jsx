@@ -65,7 +65,7 @@ function Input({ fetchData }) {
     <form onSubmit={handleSubmit}>
       <TodoInputWrapper>
         <TodoInput onChange={handleChangeInput} value={value} />
-        <CheckButton onclick={handleSubmit}>V</CheckButton>
+        <CheckButton>V</CheckButton>
       </TodoInputWrapper>
     </form>
   );
