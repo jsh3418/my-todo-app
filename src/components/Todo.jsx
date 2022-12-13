@@ -46,14 +46,14 @@ function Todo({ todo, fetchData }) {
     });
   };
 
-  const handleDeleteButton = () => {
+  const handleDeleteButtonClick = () => {
     if (window.confirm("삭제하시겠습니까?")) {
       deleteData();
       fetchData();
     }
   };
 
-  const handleEditButton = () => {
+  const handleEditButtonClick = () => {
     const editContent = prompt("수정하실 내용을 적어주세요");
     if (editContent) {
       editData(editContent);
@@ -65,8 +65,8 @@ function Todo({ todo, fetchData }) {
     <List>
       <CheckBox type="checkbox"></CheckBox>
       <span>{todo.content}</span>
-      <EditButton onClick={handleEditButton}>수정</EditButton>
-      <DeleteButton onClick={handleDeleteButton}>삭제</DeleteButton>
+      <EditButton onClick={handleEditButtonClick}>수정</EditButton>
+      <DeleteButton onClick={handleDeleteButtonClick}>삭제</DeleteButton>
     </List>
   );
 }
